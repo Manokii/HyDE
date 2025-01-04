@@ -29,8 +29,8 @@ B = Backup - Backup the target
 
 
  Hyde core files 
-P|${HOME}/.config/hyde|config.toml|hyprland
-P|${HOME}/.config/hypr|hyde.conf workflows.conf animations.conf windowrules.conf keybindings.conf userprefs.conf monitors.conf|hyprland
+S|${HOME}/.config/hyde|config.toml|hyprland
+S|${HOME}/.config/hypr|hyde.conf workflows.conf animations.conf windowrules.conf keybindings.conf userprefs.conf monitors.conf|hyprland
 P|${HOME}/.config/hypr|nvidia.conf|hyprland nvidia-utils
 P|${HOME}/.config/hypr/themes|theme.conf wallbash.conf colors.conf|hyprland
 P|${HOME}/.local/state/hyde|hyprland.conf|hyprland
@@ -65,13 +65,13 @@ P|${HOME}/.config|lsd|lsd
 P|${HOME}/.config|fastfetch|fastfetch
 O|${HOME}/.local/share/fastfetch/presets|hyde|fastfetch
 
-S|${HOME}/.config/kitty|hyde.conf theme.conf|kitty
-P|${HOME}/.config/kitty|kitty.conf|kitty
+S|${HOME}/.config/kitty|hyde.conf theme.conf kitty.sh userprefs.conf|kitty
+S|${HOME}/.config/kitty|kitty.conf|kitty
 
  Shell 
 P|${HOME}/.config|fish|fish
-P|${HOME}|.zshrc .hyde.zshrc .p10k.zsh|zsh
-P|${HOME}/.config/starship|starship.toml|starship
+S|${HOME}|.zshrc .hyde.zshrc .p10k.zsh|zsh
+S|${HOME}/.config/starship|starship.toml|starship
 S|${HOME}|.zshenv|zsh
 
  File Explorer 
@@ -111,3 +111,7 @@ S|${HOME}/.config/hypr|hyprlock|hyprlock
 
  Idle daemon 
 P|${HOME}/.config/hypr|hypridle.conf|hypridle
+
+ Others 
+S|${HOME}/.config|tmux|tmux
+S|${HOME}/.config/hyprpanel|config.json|ags-hyprpanel-git

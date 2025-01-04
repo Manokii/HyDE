@@ -10,9 +10,9 @@ pokego --no-title -r 1,3,6
 # Override aliases here or in '~/.zshrc' (already set in .zshenv)
 
 # # Helpful aliases
-# alias c='clear'                                                        # clear terminal
-# alias l='eza -lh --icons=auto'                                         # long list
-# alias ls='eza -1 --icons=auto'                                         # short list
+alias  c='clear'                                                         # clear terminal
+alias  l='eza -lha --icons=auto --sort=name --group-directories-first --no-permissions --no-user' # long list
+alias ls='eza -1   --icons=auto'                                         # short list
 # alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
 # alias ld='eza -lhD --icons=auto'                                       # long list dirs
 # alias lt='eza --icons=auto --tree'                                     # list folder as tree
@@ -33,14 +33,15 @@ pokego --no-title -r 1,3,6
 # alias .5='cd ../../../../..'
 
 # # Always mkdir a path (this doesn't inhibit functionality to make a single dir)
-# alias mkdir='mkdir -p'
+alias mkdir='mkdir -p'
 
 #  Plugins 
 # manually add your oh-my-zsh plugins here
 plugins=(
     "sudo"
-    # "git"                     # (default)
-    # "zsh-autosuggestions"     # (default)
-    # "zsh-syntax-highlighting" # (default)
-    # "zsh-completions"         # (default)
+    "git"                     # (default)
+    "zsh-autosuggestions"     # (default)
+    "zsh-syntax-highlighting" # (default)
+    "zsh-completions"         # (default)
+    "zsh-256color"
 )
