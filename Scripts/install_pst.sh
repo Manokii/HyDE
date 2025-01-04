@@ -83,3 +83,5 @@ if ! pkg_installed flatpak; then
 else
     print_log -y "[FLATPAK]" -b " :: " "flatpak is already installed"
 fi
+
+"${scrDir}/install_pst_custom.sh"
