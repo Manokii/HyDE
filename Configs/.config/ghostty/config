@@ -1,0 +1,12 @@
+background-opacity = 0.8
+background =#141423
+font-size = 14
+font-family = "JetBrainsMono Nerd Font"
+window-padding-x = 20
+window-padding-y = 20
+keybind = ctrl+backspace=text:\x1b\x7f
+
+custom-shader = shaders/cursor_smear.glsl
+custom-shader = shaders/bettercrt.glsl
+custom-shader = shaders/bloom.glsl
+adjust-underline-thickness = 1

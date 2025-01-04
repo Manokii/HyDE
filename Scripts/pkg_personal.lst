@@ -1,0 +1,65 @@
+# PESONAL CONFIG
+# --------------------------------------------------- // System
+xdg-user-dirs                                          # xdg user directories
+
+# --------------------------------------------------- // Dependencies
+unzip                                                  # required for by neovim lazy to install some packages
+v4l2loopback-dkms                                      # used for obs virtual camera
+
+# --------------------------------------------------- // Gaming
+steam                                                  # gaming platform
+gamemode                                               # daemon and library for game optimisations
+mangohud                                               # system performance overlay
+gamescope                                              # micro-compositor for gaming
+
+# --------------------------------------------------- // Music
+cava                                                   # audio visualizer
+spotify                                                # proprietary music streaming service
+spicetify-cli                                          # cli to customize spotify client
+
+# --------------------------------------------------- // Apps
+# docker                                                 # Docker
+# docker-compose                                         # Docker Compose
+1password-beta                                           # Password Manager
+# 1password-cli                                          # 1Password CLI
+zen-browser
+discord
+obsidian
+ghostty
+
+# --------------------------------------------------- // Fonts
+noto-fonts-cjk                                         # Default font fallback for asian characters
+noto-fonts-emoji                                       # Default font fallback for emoji characters
+noto-fonts                                             # A font
+ttf-jetbrains-mono-nerd                                # A font patched with nerdfont
+
+# --------------------------------------------------- // Package/Version Managers
+nvm                                                    # NodeJS version manager
+bob                                                    # Neovim version manager
+
+# --------------------------------------------------- // Utils
+git-delta                                              # Better git diff
+fzf                                                    # Fuzzy Finder
+fd                                                     # File listing tool
+ripgrep                                                # File searching tool
+bat                                                    # Better cat
+tlrc                                                   # Easy to understand manual pages. Rust version of tldr
+zoxide                                                 # Better CD with cache
+tmux                                                   # Terminal multiplexer
+satty                                                  # Annotation tool like swappy but better
+opencode-bin                                           # AI Agent
+bun-bin                                                # https://bun.sh/
+lazygit
+
+#----------------------------------------------------- // Hyprpanel, replacement for waybar
+ags-hyprpanel-git                                      # system bar
+power-profiles-daemon
+btop
+wf-recorder|ags-hyprpanel-git                          # Seems to be required by discord-canary to share screen
+hypridle
+hyprsunset
+matugen-bin
+
+# --------------------------------------------------- // Video
+vlc                                                    # video player
+vlc-plugin-ffmpeg                                      # ffmpeg plugin for vlc

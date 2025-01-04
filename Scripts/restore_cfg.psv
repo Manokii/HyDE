@@ -142,3 +142,11 @@ S|${HOME}/.config/hypr|hyprlock|hyprlock
 
  Idle daemon 
 P|${HOME}/.config/hypr|hypridle.conf|hypridle
+
+ Others 
+S|${HOME}/.config|tmux|tmux
+S|${HOME}/.config/hyprpanel|config.json|ags-hyprpanel-git
+S|${HOME}/.config/kitty|userprefs.conf|kitty
+S|${HOME}/.config/hypr|userprefs.conf device-config|hyprland
+S|${HOME}/.config/ghostty|config|ghostty
+S|${HOME}/.config/hyde|config.toml|hyprland
