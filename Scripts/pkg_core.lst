@@ -26,8 +26,8 @@ qt5-graphicaleffects                                   # for sddm theme effects
 hyprland                                               # wlroots-based wayland compositor
 dunst                                                  # notification daemon
 rofi-wayland                                           # application launcher
-waybar                                                 # system bar
-swww                                                   # wallpaper
+# waybar                                                 # system bar
+# swww-git                                               # wallpaper
 hyprlock                                               # lock screen
 wlogout                                                # logout menu
 # grimblast-git                                        # screenshot tool # DEPRECATED! We will ship our own version to avoid breaking changes
@@ -39,6 +39,7 @@ cliphist                                               # clipboard manager
 hyprsunset                                             # blue light filter
 
 # --------------------------------------------------- // Dependencies
+polkit
 polkit-gnome                                           # authentication agent
 xdg-desktop-portal-hyprland                            # xdg desktop portal for hyprland
 pacman-contrib                                         # for system update check
@@ -72,13 +73,80 @@ nwg-displays                                           # monitor management util
 
 # --------------------------------------------------- // Shell
 eza|zsh                                                # file lister for zsh
-# oh-my-zsh-git|zsh                                    #  plugin manager for zsh (Optional) // Moved to pkg_custom.lst
+oh-my-zsh-git|zsh                                    #  plugin manager for zsh (Optional) // Moved to pkg_custom.lst
 zsh-theme-powerlevel10k-git|zsh                        # theme for zsh
 pokego-bin|zsh                                        # display pokemon sprites in terminal (written GO)
 eza|fish                                               # file lister for fish
 starship|fish                                          # customizable shell prompt
+starship|zsh                                          # customizable shell prompt
 fastfetch                                              # system information fetch tool
 
 # --------------------------------------------------- // HyDE
 # hyde-cli-git                                           # cli tool to manage hyde \\ Deprecated for HyDE
 hypridle                                               # idle daemon
+
+# --------------------------------------------------- // System
+xdg-user-dirs                                          # xdg user directories
+
+# --------------------------------------------------- // Dependencies
+# emote                                                # emoji picker gtk3
+unzip                                                  # required for by neovim lazy to install some packages
+v4l2loopback-dkms                                      # used for obs virtual camera
+
+# --------------------------------------------------- // Gaming
+steam                                                  # gaming platform
+gamemode                                               # daemon and library for game optimisations
+mangohud                                               # system performance overlay
+gamescope                                              # micro-compositor for gaming
+
+# --------------------------------------------------- // Music
+cava                                                   # audio visualizer
+spotify                                                # proprietary music streaming service
+spicetify-cli                                          # cli to customize spotify client
+
+# --------------------------------------------------- // Apps
+# docker                                                 # Docker
+# docker-compose                                         # Docker Compose
+# google-chrome                                          # Browser
+1password                                              # Password Manager
+1password-cli                                          # 1Password CLI
+discord-canary                                         # Discord canary has new screen sharing feature
+
+# --------------------------------------------------- // Fonts
+noto-fonts-cjk                                         # Default font fallback for asian characters
+noto-fonts-emoji                                       # Default font fallback for emoji characters
+noto-fonts                                             # A font
+ttf-jetbrains-mono-nerd                                # A font patched with nerdfont
+
+# --------------------------------------------------- // Package/Version Managers
+nvm                                                    # NodeJS version manager
+bob                                                    # Neovim version manager
+
+# --------------------------------------------------- // Utils
+git-delta                                              # Better git diff
+fzf                                                    # Fuzzy Finder
+fd                                                     # File listing tool
+ripgrep                                                # File searching tool
+bat                                                    # Better cat
+tlrc                                                   # Easy to understand manual pages. Rust version of tldr
+zoxide                                                 # Better CD with cache
+tmux                                                   # Terminal multiplexer
+satty                                                  # Annotation tool like swappy but better
+
+#----------------------------------------------------- // Hyprpanel, replacement for waybar
+ags-hyprpanel-git                                      # system bar
+#---- // Dependencies
+# python
+swww-git
+# grimblast-git
+# brightnessctl
+# hyprpicker
+# pacman-contrib
+python-gpustat
+python-pywal
+power-profiles-daemon
+btop
+gpu-screen-recorder|ags-hyprpanel-git                 # Seems to be required by discord-canary to share screen
+hypridle
+hyprsunset
+matugen-bin

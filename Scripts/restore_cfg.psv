@@ -29,8 +29,8 @@ B = Backup - Backup the target
 
 
  Hyde core files 
-P|${HOME}/.config/hyde|config.toml|hyprland
-P|${HOME}/.config/hypr|hyde.conf animations.conf windowrules.conf keybindings.conf userprefs.conf monitors.conf|hyprland
+S|${HOME}/.config/hyde|config.toml|hyprland
+S|${HOME}/.config/hypr|hyde.conf animations.conf windowrules.conf keybindings.conf userprefs.conf monitors.conf|hyprland
 P|${HOME}/.config/hypr|nvidia.conf|hyprland nvidia-utils
 P|${HOME}/.config/hypr/themes|theme.conf wallbash.conf colors.conf|hyprland
 P|${HOME}/.local/state|hyde|hyprland
@@ -67,8 +67,8 @@ P|${HOME}/.config/kitty|kitty.conf|kitty
 
  Shell 
 P|${HOME}/.config|fish|fish
-P|${HOME}|.zshrc .hyde.zshrc .p10k.zsh|zsh zsh-theme-powerlevel10k pokego-bin
-S|${HOME}|.zshenv|zsh zsh-theme-powerlevel10k
+S|${HOME}|.zshrc .hyde.zshrc|zsh pokego-bin
+S|${HOME}|.zshenv|zsh
 
  File Explorer 
 P|${HOME}/.local/state|dolphinstaterc|dolphin
@@ -107,3 +107,7 @@ S|${HOME}/.config/hypr|hyprlock|hyprlock
 
  Idle daemon 
 P|${HOME}/.config/hypr|hypridle.conf|hypridle
+
+ Others 
+S|${HOME}/.config|tmux|tmux
+S|${HOME}/.config|hyrpanel|hyrpanel

@@ -129,13 +129,7 @@ function no_such_file_or_directory_handler {
     return 127
 }
 
-# We are loading the prompt on start so users can see the prompt immediately
-# Powerlevel10k theme path
-P10k_THEME=${P10k_THEME:-/usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme}
-[[ -r $P10k_THEME ]] && source $P10k_THEME
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(starship init zsh)"
 
 # Detect AUR wrapper and cache it for faster subsequent loads
 aur_cache_file="/tmp/.aurhelper.zshrc"
