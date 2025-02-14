@@ -13,7 +13,7 @@
 
 ### Who are the $USER?
 
-> **NOTE**: If you're confused why every `install.sh -r` overwrites your configs, you should fork [prasanthrangan/hyprdots](https://github.com/prasanthrangan/hyprdots), edit the `*.lst` file, and run the script. That’s the intended way.
+> **NOTE**: If you're confused why every `install.sh -r` overwrites your configs, you should fork [HyDE](https://github.com/HyDE-Project/HyDE), edit the `*.lst` file, and run the script. That’s the intended way.
 
 Who are the $USER?
 
@@ -70,5 +70,7 @@ Here are some of my speculations:
 
 - **Hy**prdots **D**otfiles **E**nhanced - Enhanced version of hyprdots when @prasanthrangan introduced wallbash as our main theme management engine.
 - **Hy**prland **D**otfiles **E**xtended - Extensible Dotfiles for Hyprland.
+- But the one that make most sense is - **Hy**prland **D**esktop **E**nvironment - as hyprland is usually considered a WM for wayland, not a full fledged D.E and this 
+  dotfile kind of turns it into a full-blown D.E.
 
 Feel free to suggest your own meaning of HyDE. 🤔

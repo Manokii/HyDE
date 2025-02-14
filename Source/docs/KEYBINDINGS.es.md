@@ -1,15 +1,60 @@
+<div align = center>
+  <a href="https://discord.gg/AYbJ9MJez7">
+    <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+  </a>
+</div>
+
+###### _<div align="right"><a id=-design-by-t2></a><sub>// design by t2</sub></div>_
+
+![hyde_banner](../assets/hyde_banner.png)
+
 <!--
-Multi-language README support
+Soporte multilingüe de KEYBINDINGS
 -->
 
-[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/HyDE-Project/HyDE/blob/master/KEYBINDINGS.md)
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/HyDE-Project/HyDE/blob/master/Source/docs/KEYBINDINGS.es.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](../../KEYBINDINGS.md)
+[![de](https://img.shields.io/badge/lang-de-black.svg)](KEYBINDINGS.de.md)
+[![中文](https://img.shields.io/badge/lang-中文-orange.svg)](KEYBINDINGS.zh.md)
+<!-- [![es](https://img.shields.io/badge/lang-es-yellow.svg)](KEYBINDINGS.es.md) -->
 
-## Gestión de ventanas
+<div align="center">
+
+<br>
+
+<!-- <a href=#hyde-combinaciones><kbd> <br> HyDE combinaciones <br> </kbd></a>&ensp;&ensp; -->
+<a href=#gestión-de-ventanas><kbd> <br> Gestión de ventanas <br> </kbd></a>&ensp;&ensp;
+<a href=#varios><kbd> <br> Varios <br> </kbd></a>&ensp;&ensp;
+<a href=#lanzador><kbd> <br> Lanzador <br> </kbd></a>&ensp;&ensp;
+<a href=#controles-de-hardware><kbd> <br> Controles de hardware <br> </kbd></a>&ensp;&ensp;
+<a href=#utilidades><kbd> <br> Utilidades <br> </kbd></a>&ensp;&ensp;
+<a href=#tematización-y-fondos-de-pantalla><kbd> <br> Tematización y fondos de pantalla <br> </kbd></a>&ensp;&ensp;
+<a href=#espacios-de-trabajo><kbd> <br> Espacios de trabajo <br> </kbd></a>&ensp;&ensp;
+
+</div><br><br>
+
+<div align="center">
+  <div style="display: flex; flex-wrap: nowrap; justify-content: center;">
+    <img src="../assets/archlinux.png" alt="Arch Linux" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/cachyos.png" alt="CachyOS" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/endeavouros.png" alt="EndeavourOS" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/garuda.png" alt="Garuda" style="width: 10%; margin: 10px;"/>
+    <img src="../assets/nixos.png" alt="NixOS" style="width: 10%; margin: 10px;"/>
+  </div>
+</div>
+
+<!-- # <a id=hyde-combinaciones>HyDE Combinaciones</a> -->
+<!-- # <a id=hyde-combinaciones></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&width=435&lines=HyDE%20Combinaciones" width="450"/> -->
+Aquí están listados todos los keybindings específicos de HyDE.
+
+>[!TIP]
+> <kbd>Super</kbd> + <kbd>/</kbd> muestra las combinaciones de teclas.
+
+<!-- ## <a id=gestión-de-ventanas>Gestión de ventanas</a> -->
+## <a id="gestión-de-ventanas"></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=23&pause=1000&color=CCA9DD&width=435&lines=Gesti%C3%B3n%20de%20ventanas" width="450"/>
 
 | Teclas                                               | Acción                                                                  |
 | :--------------------------------------------------- | :---------------------------------------------------------------------- |
-| <kbd>CTRL</kbd> + <kbd>Q</kbd>                       | cerrar ventana enfocada                                                 |
+| <kbd>SUPER</kbd> + <kbd>Q</kbd>                      | cerrar ventana enfocada                                                 |
 | <kbd>ALT</kbd> + <kbd>F4</kbd>                       | cerrar ventana enfocada                                                 |
 | <kbd>SUPER</kbd> + <kbd>Delete</kbd>                 | matar sesión de hyprland                                                |
 | <kbd>SUPER</kbd> + <kbd>W</kbd>                      | alternar flotador                                                       |
@@ -55,16 +100,18 @@ Multi-language README support
 | <kbd>SUPER</kbd> + <kbd>Z</kbd>         | mantenga presionado para mover la ventana                |
 | <kbd>SUPER</kbd> + <kbd>X</kbd>         | mantener presionado para cambiar el tamaño de la ventana |
 
-## Varios
+<!-- ## <a id=varios>Varios</a> -->
+## <a id=varios></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=23&pause=1000&color=CCA9DD&width=435&lines=Varios" width="450"/>
 
 | Teclas                                                                   | Acción                                 |
 | :----------------------------------------------------------------------- | :------------------------------------- |
-| <kbd>SUPER</kbd> + <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>left</kbd>  | mover la ventana activa a izquierda    |
-| <kbd>SUPER</kbd> + <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>right</kbd> | mover la ventana activa a la derecha   |
-| <kbd>SUPER</kbd> + <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>up</kbd>    | mover la ventana activa a hacia arriba |
+| <kbd>SUPER</kbd> + <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>left</kbd>  | Mover la ventana activa a izquierda    |
+| <kbd>SUPER</kbd> + <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>right</kbd> | Mover la ventana activa a la derecha   |
+| <kbd>SUPER</kbd> + <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>up</kbd>    | Mover la ventana activa a hacia arriba |
 | <kbd>SUPER</kbd> + <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>down</kbd>  | Mover la ventana activa a hacia abajo  |
 
-## Lanzador
+<!-- ## <a id=lanzador>Lanzador</a> -->
+## <a id=lanzador></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=23&pause=1000&color=CCA9DD&width=435&lines=Lanzador" width="450"/>
 
 ### Apps
 
@@ -80,7 +127,7 @@ Multi-language README support
 
 | Teclas                                             | Acción                                |
 | :------------------------------------------------- | :------------------------------------ |
-| <kbd>ALT</kbd> + <kbd>space</kbd>                  | buscador de aplicaciones              |
+| <kbd>SUPER</kbd> + <kbd>A</kbd>                    | buscador de aplicaciones              |
 | <kbd>SUPER</kbd> + <kbd>TAB</kbd>                  | conmutador de ventana                 |
 | <kbd>SUPER</kbd> + <kbd>SHIFT</kbd> + <kbd>E</kbd> | buscador de archivos                  |
 | <kbd>SUPER</kbd> + <kbd>slash</kbd>                | sugerencia de combinaciones de teclas |
@@ -90,7 +137,8 @@ Multi-language README support
 | <kbd>SUPER</kbd> + <kbd>SHIFT</kbd> + <kbd>V</kbd> | administrador del portapapeles        |
 | <kbd>SUPER</kbd> + <kbd>SHIFT</kbd> + <kbd>A</kbd> | seleccione el lanzador rofi           |
 
-## Controles de hardware
+<!-- ## <a id=controles-de-hardware>Controles de hardware</a> -->
+## <a id=controles-de-hardware></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=23&pause=1000&color=CCA9DD&width=435&lines=Controles%20de%20hardware" width="450"/>
 
 ### Audio
 
@@ -120,7 +168,8 @@ Multi-language README support
 | <kbd>None</kbd> + <kbd>XF86MonBrightnessUp</kbd>   | subir el brillo |
 | <kbd>None</kbd> + <kbd>XF86MonBrightnessDown</kbd> | bajar el brillo |
 
-## Utilidades
+<!-- ## <a id=utilidades>Utilidades</a> -->
+## <a id=utilidades></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=23&pause=1000&color=CCA9DD&width=435&lines=Utilidades" width="450"/>
 
 | Teclas                                           | Acción                              |
 | :----------------------------------------------- | :---------------------------------- |
@@ -137,7 +186,8 @@ Multi-language README support
 | <kbd>SUPER</kbd> + <kbd>ALT</kbd> + <kbd>P</kbd>   | capturar pantalla a un solo monitor     |
 | <kbd>None</kbd> + <kbd>Print</kbd>                 | capturar pantalla a todos los monitores |
 
-## Tematización y fondos de pantalla
+<!-- ## <a id="tematización-y-fondos-de-pantalla">Tematización y fondos de pantalla</a> -->
+## <a id=tematización-y-fondos-de-pantalla></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=23&pause=1000&color=CCA9DD&width=520&lines=Tematizaci%C3%B3n%20y%20fondos%20de%20pantalla" width="450"/>
 
 | Teclas                                               | Acción                               |
 | :--------------------------------------------------- | :----------------------------------- |
@@ -149,7 +199,8 @@ Multi-language README support
 | <kbd>SUPER</kbd> + <kbd>SHIFT</kbd> + <kbd>R</kbd>   | selector de modo de wallbash         |
 | <kbd>SUPER</kbd> + <kbd>SHIFT</kbd> + <kbd>T</kbd>   | seleccione un tema                   |
 
-## Espacios de trabajo
+<!-- ## <a id="espacios-de-trabajo">Espacios de trabajo</a> -->
+## <a id=espacios-de-trabajo></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=23&pause=1000&color=CCA9DD&width=435&lines=Espacios%20de%20trabajo" width="450"/>
 
 ### Navegación
 
@@ -180,9 +231,9 @@ Multi-language README support
 
 | Teclas                                                 | Acción                              |
 | :----------------------------------------------------- | :---------------------------------- |
-| <kbd>SUPER</kbd> + <kbd>SHIFT</kbd> + <kbd>grave</kbd> | pasar al bloc de notas              |
-| <kbd>SUPER</kbd> + <kbd>ALT</kbd> + <kbd>grave</kbd>   | mover al bloc de notas (silencioso) |
-| <kbd>SUPER</kbd> + <kbd>grave</kbd>                    | alternar bloc de notas              |
+| <kbd>SUPER</kbd> + <kbd>SHIFT</kbd> + <kbd>S</kbd>     | pasar al bloc de notas              |
+| <kbd>SUPER</kbd> + <kbd>ALT</kbd> + <kbd>S</kbd>       | mover al bloc de notas (silencioso) |
+| <kbd>SUPER</kbd> + <kbd>S</kbd>                        | alternar bloc de notas              |
 
 #### Mover la ventana silenciosamente
 
@@ -218,3 +269,23 @@ Multi-language README support
 | :--------------------------------------------------------------------- | :-------------------------------------------------------- |
 | <kbd>SUPER</kbd> + <kbd>ALT</kbd> + <kbd>CTRL</kbd> + <kbd>Right</kbd> | mover la ventana al siguiente espacio de trabajo relativo |
 | <kbd>SUPER</kbd> + <kbd>ALT</kbd> + <kbd>CTRL</kbd> + <kbd>Left</kbd>  | mover la ventana al espacio de trabajo relativo anterior  |
+
+<!--
+<div align="right">
+  <br>
+  <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
+</div>
+
+<div align="center">
+
+</div>
+-->
+
+<div align="right">
+  <br>
+  <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
+</div>
+
+<div align="right">
+  <sub>Última edición el: 02/01/2025<span id="last-edited"></span></sub>
+</div>

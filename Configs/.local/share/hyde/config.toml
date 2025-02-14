@@ -1,6 +1,6 @@
 # Configuration file for HyDE
 # Environment variables should be on top
-# Updated config.toml file can be found at $HOME/.local/share/hyde/config.toml
+# Add your custom configuration in '~/.config/hyde/config.toml'
 
 WARP_ENABLE_WAYLAND = 1
 
@@ -19,6 +19,10 @@ transition_next = "grow"    # transition type for next wallpaper
 transition_prev = "outer"   # transition type for previous wallpaper
 transition_default = "grow" # transition type for default wallpaper
 
+
+# NOTE: 
+# for [rofi.*] 
+# style <--script's built-in styles, also accepts themes from rofi-theme-selector
 
 [rofi]
 # global rofi configuration`
@@ -115,13 +119,15 @@ file = "$HOME/.config/hyde/search.lst"
 [wallbash]
 skip_template = [
     "",
-] # skips the template when using wallbash. Requires full path to the template
+]    # skips the template when using wallbash. Requires full path to the template
 
 [waybar]
 font = "JetBrainsMono Nerd Font"
-font_size = 10
-# output = ["", ""]                # Default monitor output for waybar
+scale=30                                # total scaling
+# output = ["", ""]                     # Default monitor output for waybar
 
+[waybar.weather]
+loc = true # Show location in bar // accepts true or false or location/coordinates string
 
 [cava.stdout]
 # 'cava.sh stdout' configuration
@@ -158,6 +164,8 @@ sanitize = [
 # volumecontrol.sh configuration
 notify = true # Useful for systems that have their own OSD
 steps = 5     # Number of steps to increase/decrease volume
+boost = false # Enable volume boost
+boost_limit = 150 # Volume boost limit // Don't kill your ears/speakers
 
 [brightness]
 # brightnesscontrol.sh configuration
@@ -169,3 +177,9 @@ steps = 5     # Number of steps to increase/decrease brightness
 #  sysmonlaunch.sh configuration // System monitor configuration
 execute = "btop"                   # Default command to execute // accepts executable or app.desktop
 commands = ["btop", "htop", "top"] # Fallback command options
+
+
+[notification]
+# notification script can use this configuration
+font = "mononoki Nerd Font"         # Font for notifications
+font_size = 8                     # Font size for notifications

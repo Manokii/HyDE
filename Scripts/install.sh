@@ -162,8 +162,8 @@ EOF
 
         case "${PROMPT_INPUT}" in
         1) export getAur="yay" ;;
-        2) export getAur="yay-bin" ;;
-        3) export getAur="paru" ;;
+        2) export getAur="paru" ;;
+        3) export getAur="yay-bin" ;;
         4) export getAur="paru-bin" ;;
         q)
             print_log -sec "AUR" -crit "Quit" "Exiting..."
@@ -243,7 +243,7 @@ EOF
     "${scrDir}/restore_fnt.sh"
     "${scrDir}/restore_cfg.sh"
     "${scrDir}/restore_thm.sh"
-
+    print_log -g "[generate] " "cache ::" "Wallpapers..."
     if [ "${flg_DryRun}" -ne 1 ]; then
         "$HOME/.local/lib/hyde/swwwallcache.sh" -t ""
         "$HOME/.local/lib/hyde/themeswitch.sh" -q || true
@@ -304,13 +304,13 @@ print_log -stat "Log" "View logs at ${cacheDir}/logs/${HYDE_LOG}"
 if [ $flg_Install -eq 1 ] ||
     [ $flg_Restore -eq 1 ] ||
     [ $flg_Service -eq 1 ]; then
-    print_log -stat "HyDE" "It is not recommended to use newly installed or upgraded HyDE without rebooting the system. Do you want to reboot the system? (y/n)"
-read answer
+    print_log -stat "HyDE" "It is not recommended to use newly installed or upgraded HyDE without rebooting the system. Do you want to reboot the system? (y/N)"
+    read -r answer
 
-if [ "$answer" == "y" ]; then
-  echo "Rebooting system"
-  sudo reboot
-else
-  echo "The system will not reboot"
-fi
+    if [[ "$answer" == [Yy] ]]; then
+        echo "Rebooting system"
+        systemctl reboot
+    else
+        echo "The system will not reboot"
+    fi
 fi

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-dock=${BATTERY_NOTIFY_DOCK:-true}
 scrDir=$(dirname "$(realpath "$0")")
 # shellcheck disable=SC1091
 source "$scrDir/globalcontrol.sh"
-batterynotify_conf="$HYDE_STATE_HOME/staterc" # Shared with hyde configuration
+dock=${BATTERY_NOTIFY_DOCK:-false}
+
 config_info() {
     cat <<EOF
 
-Modify $batterynotify_conf  to set options.
+Modify '$XDG_CONFIG_HOME/hyde/config.toml'  to set options.
 
       STATUS      THRESHOLD    INTERVAL
       Full        $battery_full_threshold          $notify Minutes
@@ -16,8 +16,11 @@ Modify $batterynotify_conf  to set options.
       Low         $battery_low_threshold           $interval Percent    then '$execute_low'
       Unplug      $unplug_charger_threshold          $interval Percent   then '$execute_unplug'
 
-      Charging: $execute_charging
-      Discharging: $execute_discharging
+      Command on Charging: $execute_charging
+      Command on Discharging: $execute_discharging
+      Dock Mode: $dock (Will not notify on status change) 
+
+
 EOF
 }
 
@@ -44,21 +47,21 @@ VERBOSE
 fn_percentage() {
     if [[ "$battery_percentage" -ge "$unplug_charger_threshold" ]] && [[ "$battery_status" != "Discharging" ]] && [[ "$battery_status" != "Full" ]] && (((battery_percentage - last_notified_percentage) >= interval)); then
         if $verbose; then echo "Prompt:UNPLUG: $unplug_charger_threshold $battery_status $battery_percentage"; fi
-        notify-send -a "HyDE Power" -t 5000 -r 69 -u "CRITICAL" "Battery Charged" "Battery is at $battery_percentage%. You can unplug the charger!"
+        notify-send -a "HyDE Power" -t 5000 -r 6 -u "CRITICAL" "Battery Charged" "Battery is at $battery_percentage%. You can unplug the charger!"
         last_notified_percentage=$battery_percentage
     elif [[ "$battery_percentage" -le "$battery_critical_threshold" ]]; then
         count=$((timer > mnt ? timer : mnt)) # reset count
         while [ $count -gt 0 ] && [[ $battery_status == "Discharging"* ]]; do
             for battery in /sys/class/power_supply/BAT*; do battery_status=$(<"$battery/status"); done
             if [[ $battery_status != "Discharging" ]]; then break; fi
-            notify-send -a "HyDE Power" -t 5000 -r 69 -u "CRITICAL" "Battery Critically Low" "$battery_percentage% is critically low. Device will execute $execute_critical in $((count / 60)):$((count % 60)) ."
+            notify-send -a "HyDE Power" -t 5000 -r 6 -u "CRITICAL" "Battery Critically Low" "$battery_percentage% is critically low. Device will execute $execute_critical in $((count / 60)):$((count % 60)) ."
             count=$((count - 1))
             sleep 1
         done
         [ $count -eq 0 ] && fn_action
     elif [[ "$battery_percentage" -le "$battery_low_threshold" ]] && [[ "$battery_status" == "Discharging" ]] && (((last_notified_percentage - battery_percentage) >= interval)); then
         if $verbose; then echo "Prompt:LOW: $battery_low_threshold $battery_status $battery_percentage"; fi
-        notify-send -a "HyDE Power" -t 5000 -r 69 -u "CRITICAL" "Battery Low" "Battery is at $battery_percentage%. Connect the charger."
+        notify-send -a "HyDE Power" -t 5000 -r 6 -u "CRITICAL" "Battery Low" "Battery is at $battery_percentage%. Connect the charger."
         last_notified_percentage=$battery_percentage
     fi
 }
@@ -78,7 +81,7 @@ fn_status() {
         if [[ "$prev_status" != "Discharging" ]] || [[ "$prev_status" == "Full" ]]; then
             prev_status=$battery_status
             urgency=$([[ $battery_percentage -le "$battery_low_threshold" ]] && echo "CRITICAL" || echo "NORMAL")
-            notify-send -a "HyDE Power" -t 5000 -r 69 -u "CRITICAL" "Charger Plug Out" "Battery is at $battery_percentage%."
+            notify-send -a "HyDE Power" -t 5000 -r 6 -u "CRITICAL" "Charger Plug Out" "Battery is at $battery_percentage%."
             $execute_discharging
         fi
         fn_percentage
@@ -90,7 +93,7 @@ fn_status() {
             prev_status=$battery_status
             count=$((timer > mnt ? timer : mnt)) # reset count
             urgency=$([[ "$battery_percentage" -ge $unplug_charger_threshold ]] && echo "CRITICAL" || echo "NORMAL")
-            notify-send -a "HyDE Power" -t 5000 -r 69 -u "${urgency}" "Charger Plug In" "Battery is at $battery_percentage%."
+            notify-send -a "HyDE Power" -t 5000 -r 6 -u "${urgency}" "Charger Plug In" "Battery is at $battery_percentage%."
             $execute_charging
         fi
         fn_percentage
@@ -100,7 +103,7 @@ fn_status() {
         if [[ $battery_status != "Discharging" ]]; then
             now=$(date +%s)
             if [[ "$prev_status" == *"harging"* ]] || ((now - lt >= $((notify * 60)))); then
-                notify-send -a "HyDE Power" -t 5000 -r 69 -u "CRITICAL" "Battery Full" "Please unplug your Charger"
+                notify-send -a "HyDE Power" -t 5000 -r 6 -u "CRITICAL" "Battery Full" "Please unplug your Charger"
                 prev_status=$battery_status lt=$now
                 $execute_charging
             fi
@@ -146,7 +149,7 @@ fn_status_change() { # Handle when status changes
             $execute_unplug
             executed_unplug=true executed_low=false
         fi
-        if $dock; then fn_status; fi
+        if ! $dock; then fn_status; fi
     fi
 }
 

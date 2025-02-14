@@ -33,13 +33,12 @@ fn_profile() {
 }
 
 fn_mpris() {
-    local player=${1:-"all"}
+    local player=${1:-""}
     THUMB="${cacheDir}/landing/mpris"
     if [ "$(playerctl -p "${player}" status)" == "Playing" ]; then
         playerctl -p "${player}" metadata --format "{{xesam:title}} $(mpris_icon "${player}")  {{xesam:artist}}"
         mpris_thumb "${player}"
     else
-
         if [ -f "$HOME/.face.icon" ]; then
             if ! cmp -s "$HOME/.face.icon" "${THUMB}.png"; then
                 cp -f "$HOME/.face.icon" "${THUMB}.png"
@@ -52,6 +51,7 @@ fn_mpris() {
                 pkill -USR2 hyprlock 2>/dev/null # updates the mpris thumbnail
             fi
         fi
+        exit 1
     fi
 }
 
@@ -79,7 +79,7 @@ mpris_icon() {
 }
 
 mpris_thumb() { # Generate thumbnail for mpris
-    local player=${1:-all}
+    local player=${1:-""}
     artUrl=$(playerctl -p "${player}" metadata --format '{{mpris:artUrl}}')
     [ "${artUrl}" == "$(cat "${THUMB}".lnk)" ] && [ -f "${THUMB}".png ] && exit 0
     echo "${artUrl}" >"${THUMB}".lnk
@@ -105,9 +105,16 @@ fn_art() {
 # hyprlock selector
 fn_select() {
     # Set rofi scaling
-    rofiScale="${ROFI_HYPRLOCK_SCALE}"
-    [[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=${ROFI_SCALE:-10}
-    r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+    font_scale="${ROFI_HYPRLOCK_SCALE}"
+    [[ "${font_scale}" =~ ^[0-9]+$ ]] || font_scale=${ROFI_SCALE:-10}
+
+    # set font name
+    font_name=${ROFI_HYPRLOCK_FONT:-$ROFI_FONT}
+    font_name=${font_name:-$(get_hyprConf "MENU_FONT")}
+    font_name=${font_name:-$(get_hyprConf "FONT")}
+
+    # set rofi font override
+    font_override="* {font: \"${font_name:-"JetBrainsMono Nerd Font"} ${font_scale}\";}"
 
     # Window and element styling
     hypr_border=${hypr_border:-"$(hyprctl -j getoption decoration:rounding | jq '.int')"}
@@ -128,15 +135,14 @@ fn_select() {
     layout_items="Theme Preference
 $layout_items"
 
-    rofi_config="$confDir/rofi/clipboard.rasi"
     selected_layout=$(awk -F/ '{print $NF}' <<<"$layout_items" |
         rofi -dmenu -i -select "${HYPRLOCK_LAYOUT}" \
             -p "Select hyprlock layout" \
             -theme-str "entry { placeholder: \"🔒 Hyprlock Layout...\"; }" \
-            -theme-str "${r_scale}" \
+            -theme-str "${font_override}" \
             -theme-str "${r_override}" \
             -theme-str "$(get_rofi_pos)" \
-            -theme "$rofi_config")
+            -theme "${ROFI_HYPRLOCK_STYLE:-clipboard}")
     if [ -z "$selected_layout" ]; then
         echo "No selection made"
         exit 0
@@ -199,6 +205,10 @@ source = ${hyde_hyprlock_conf}
 # \$BACKGROUND_PATH
 # - The path to the wallpaper image.
 
+# \$HYPRLOCK_BACKGROUND
+# - The path to the static hyprlock wallpaper image.
+# - Can be set to set a static wallpaper for Hyprlock.
+
 # \$MPRIS_IMAGE
 # - The path to the MPRIS image.
 # - If MPRIS is not available, it will show the ~/.face.icon image
@@ -210,7 +220,7 @@ source = ${hyde_hyprlock_conf}
 # - if available, otherwise, it will show the HyDE logo.
 
 # \$GREET_TEXT
-# - The text to be displayed on the lock screen.
+# - A greeting text to be displayed on the lock screen.
 # - The text will be updated every hour.
 
 # \$resolve.font
@@ -219,36 +229,105 @@ source = ${hyde_hyprlock_conf}
 # - Note that you needed to have a network connection to download the font.
 # - You also need to restart Hyprlock to apply the font.
 
-# cmd [update:1000] $MPRIS_TEXT
+# cmd [update:1000] \$MPRIS_TEXT
 # - Text from media players in "Title  Author" format.
 
 
-# cmd [update:1000] $SPLASH_CMD
+# cmd [update:1000] \$SPLASH_CMD
 # - Outputs the song title when MPRIS is available,
 # - otherwise, it will output the splash command.
 
-# cmd [update:1] $CAVA_CMD
+# cmd [update:1] \$CAVA_CMD
 # - The command to be executed to get the CAVA output.
 # - ⚠️ (Use with caution as it eats up the CPU.)
 
+# cmd [update:5000] \$BATTERY_ICON
+# - The battery icon to be displayed on the lock screen.
+# - Only works if the battery is available.
+
+# cmd [update:1000] \$KEYBOARD_LAYOUT
+# - The current keyboard layout
+# - SUPER + K to change the keyboard layout (or any binding you set)
 
 CONF
 }
 
 fn_help() {
-    echo "Usage: hyprlock.sh [command]"
-    echo "Commands:"
-    echo "  background   - Converts and ensures background to be a png"
-    echo "  mpris        - Handles mpris thumbnail generation"
-    echo "  profile      - Generates the profile picture"
-    echo "  cava         - Placeholder function for cava"
-    echo "  art          - Prints the path to the mpris art"
-    echo "  select       - Selects the hyprlock layout"
-    echo "  help         - Displays this help message"
+    cat <<EOF
+    Usage: hyprlock.sh [command]"
+    Commands:"
+      --background -b    - Converts and ensures background to be a png
+                            : \$BACKGROUND_PATH
+      --mpris           - Handles mpris thumbnail generation
+                            : \$MPRIS_IMAGE
+      --profile          - Generates the profile picture
+                            : \$PROFILE_IMAGE
+      --cava             - Placeholder function for cava
+                            : \$CAVA_CMD
+      --art              - Prints the path to the mpris art"
+                            : \$MPRIS_ART
+      --select      -s     - Selects the hyprlock layout"
+                            : \$LAYOUT_PATH
+      --help       -h    - Displays this help message"
+EOF
 }
 
-if declare -f "fn_${1}" >/dev/null; then
-    "fn_${1}"
-else
+if [ -z "${*}" ]; then
+    if [ ! -f "$HYDE_CACHE_HOME/wallpapers/hyprlock.png" ]; then
+        print_log -sec "hyprlock" -stat "setting" " $HYDE_CACHE_HOME/wallpapers/hyprlock.png"
+        "${scrDir}/wallpaper.sh" -s "$(readlink "${HYDE_THEME_DIR}/wall.set")" --backend hyprlock
+    fi
     hyprlock
 fi
+
+# Define long options
+LONGOPTS="select,background,profile,mpris,cava,art,help"
+
+# Parse options
+PARSED=$(
+    if getopt --options shb --longoptions $LONGOPTS --name "$0" -- "$@"; then
+        exit 2
+    fi
+)
+
+# Apply parsed options
+# echo "$PARSED"
+eval set -- "$PARSED"
+
+while true; do
+    case "$1" in
+    select | -s | --select)
+        fn_select
+        exit 0
+        ;;
+    background | --background | -b)
+        fn_background
+        exit 0
+        ;;
+    profile | --profile)
+        fn_profile
+        exit 0
+        ;;
+    mpris | --mpris)
+        fn_mpris "${2}"
+        exit 0
+        ;;
+    cava | --cava) # Placeholder function for cava
+        fn_cava
+        exit 0
+        ;;
+    art | --art)
+        fn_art
+        exit 0
+        ;;
+    help | --help | -h)
+        fn_help
+        exit 0
+        ;;
+    --)
+        shift
+        break
+        ;;
+    esac
+
+done
