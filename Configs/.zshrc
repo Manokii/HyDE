@@ -11,13 +11,15 @@ eval "$(zoxide init zsh --cmd cd)"
 export EDITOR='nvim'
 
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
 
 export PATH="$PATH:/home/manok/.local/share/bob/nvim-bin"
 export BAT_THEME='catpuccin_latte'
+export SSH_AUTH_SOCK=~/.1password/agent.sock
 
 _fzf_compgen_path() {
   fd --hidden --exclude .git . "$1"
@@ -47,7 +49,7 @@ alias ssh='kitten ssh' \
       dkill='sudo docker kill $(sudo docker ps -q)' \
       ld='sudo lazydocker' \
       mac='ssh $MAC_HOST' \
-      pip='pyenv exec pip install' 
+      pip='pyenv exec pip install'
 
 
 function cpconfig() {
@@ -63,7 +65,8 @@ function cpconfig() {
 bindkey '^Y' autosuggest-accept
 bindkey '^ ' forward-word
 bindkey '^W' backward-kill-word
-source /usr/share/nvm/init-nvm.sh
+
+#  Configs 
 
 # pnpm
 export PNPM_HOME="/home/manok/.local/share/pnpm"
@@ -72,16 +75,18 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-source ~/Scripts/fzf-git.sh
-alias vim='nvim'
 
-export SSH_AUTH_SOCK=~/.1password/agent.sock
-source /usr/share/nvm/init-nvm.sh
-source ~/Scripts/fzf-git.sh
-alias vim='nvim'
-source /usr/share/nvm/init-nvm.sh
-source ~/Scripts/fzf-git.sh
-alias vim='nvim'
-source /usr/share/nvm/init-nvm.sh
-source ~/Scripts/fzf-git.sh
-alias vim='nvim'
+# fzf
+if [ -f ~/Scripts/fzf-git.sh ]; then
+    source ~/Scripts/fzf-git.sh
+fi
+
+# Node Version Manager
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
+    source /usr/share/nvm/init-nvm.sh
+fi
+
+if command -v nvim >/dev/null 2>&1; then
+    export EDITOR='nvim'
+    alias vim='nvim'
+fi

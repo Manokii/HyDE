@@ -129,8 +129,6 @@ function no_such_file_or_directory_handler {
     return 127
 }
 
-eval "$(starship init zsh)"
-# export env vars here
 
 # cleaning up home folder
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"

@@ -13,7 +13,6 @@ if pkg_installed nvm
 
     echo "Adding nvm to .zshrc"
     source /usr/share/nvm/init-nvm.sh
-    echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.zshrc
 
     if command -v node &> /dev/null
         then
@@ -55,7 +54,6 @@ if pkg_installed fzf
     fi
 
     curl "https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh" > ~/Scripts/fzf-git.sh
-    echo "source ~/Scripts/fzf-git.sh" >> ~/.zshrc
 fi
 
 if pkg_installed bob 
@@ -74,7 +72,6 @@ if pkg_installed bob
     else
       echo "Neovim config already exists, skipping setup..."
     fi
-    echo "alias vim='nvim'" >> ~/.zshrc
 
 fi
 
