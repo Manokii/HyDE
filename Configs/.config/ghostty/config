@@ -1,0 +1,17 @@
+theme = caelestia
+background-opacity = 0.95
+# window-padding-color = extend-always
+# background =#141423
+background =#000000
+background-opacity = 0.8
+background-blur = true
+font-size = 14
+font-family = "JetBrainsMono Nerd Font"
+window-padding-x = 20
+window-padding-y = 20
+# keybind = ctrl+backspace=text:\x1b\x7f
+
+# custom-shader = shaders/bloom.gls
+custom-shader = shaders/cursor_smear.glsl
+# custom-shader = shaders/bettercrt.glsl
+adjust-underline-thickness = 1

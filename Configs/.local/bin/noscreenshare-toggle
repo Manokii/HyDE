@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Toggle the `no_screen_share` window rules as a group.
+#
+# Rules live in ~/.config/hypr/noscreenshare.conf. Turning them off
+# prefixes each active rule with `#off#`; turning them on strips the prefix.
+# Lines commented by hand (plain `#`) are never touched.
+#
+# Usage: noscreenshare-toggle [on|off|toggle]   (default: toggle)
+
+set -euo pipefail
+
+conf="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/noscreenshare.conf"
+
+if [ ! -f "$conf" ]; then
+    notify-send -u critical -a "HyDE Alert" "no_screen_share" "missing $conf"
+    exit 1
+fi
+
+is_off() { grep -q '^#off#' "$conf"; }
+
+case "${1:-toggle}" in
+on) want=on ;;
+off) want=off ;;
+toggle) is_off && want=on || want=off ;;
+*)
+    echo "usage: $(basename "$0") [on|off|toggle]" >&2
+    exit 1
+    ;;
+esac
+
+if [ "$want" = on ]; then
+    sed -i 's/^#off# //' "$conf"
+else
+    sed -i -E 's/^([[:space:]]*windowrule[[:space:]]*=[[:space:]]*no_screen_share)/#off# \1/' "$conf"
+fi
+
+hyprctl reload >/dev/null
+
+if [ "$want" = on ]; then
+    notify-send -r 91 -a "HyDE Alert" -i security-high \
+        "Screen-share protection on" "protected windows are hidden from capture"
+else
+    notify-send -r 91 -u critical -a "HyDE Alert" -i security-low \
+        "Screen-share protection off" "every window is now capturable"
+fi

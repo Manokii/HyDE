@@ -1,0 +1,28 @@
+# caelestia / black / dark (tonalspot)
+# generated from ~/.local/state/caelestia/scheme.json
+
+background = #000000
+foreground = #dce8e6
+
+cursor-color = #b0ccc9
+cursor-text = #2c4543
+
+selection-background = #255b58
+selection-foreground = #b8ede9
+
+palette = 0=#343434
+palette = 1=#769e00
+palette = 2=#56e2c0
+palette = 3=#81fcce
+palette = 4=#76b6b3
+palette = 5=#7aaee9
+palette = 6=#83d8c9
+palette = 7=#cddcd3
+palette = 8=#9aa59e
+palette = 9=#85b900
+palette = 10=#41f7d0
+palette = 11=#cdffe9
+palette = 12=#a3c8c3
+palette = 13=#a2c0f7
+palette = 14=#8bedd9
+palette = 15=#ffffff

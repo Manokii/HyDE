@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+# Screenshot that temporarily bypasses `no_screen_share` window rules.
+#
+# The area/geometry is chosen BEFORE protection is dropped, so the windows are
+# only capturable for the duration of the grim call (milliseconds), not while
+# slurp or the annotation tool is open.
+#
+# Usage: screenshot-unblocked [s|m|p]
+#   s  select an area or window (default)
+#   m  focused monitor
+#   p  all monitors
+
+set -uo pipefail
+
+mode="${1:-s}"
+
+save_dir="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
+save_file="$save_dir/$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')"
+mkdir -p "$save_dir"
+
+annotate=""
+command -v swappy >/dev/null && annotate=swappy
+command -v satty >/dev/null && annotate=satty
+
+unblocked=()
+restore() {
+    local a
+    for a in ${unblocked[@]+"${unblocked[@]}"}; do
+        hyprctl dispatch setprop "address:$a" no_screen_share unset >/dev/null
+    done
+    unblocked=()
+}
+trap restore EXIT INT TERM HUP
+
+# --- 1. pick the region while no_screen_share is still in force ------------
+case "$mode" in
+s)
+    visible_ws=$(hyprctl monitors -j |
+        jq -c '[.[] | if .specialWorkspace.name == "" then .activeWorkspace.id else .specialWorkspace.id end]')
+    geom=$(hyprctl clients -j |
+        jq -r --argjson ws "$visible_ws" \
+            'map(select([.workspace.id] | inside($ws)))[] | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' |
+        slurp)
+    [ -z "$geom" ] && exit 1
+    ;;
+m) output=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name') ;;
+p) : ;;
+*)
+    echo "usage: $(basename "$0") [s|m|p]" >&2
+    exit 1
+    ;;
+esac
+
+# --- 2. drop protection on every currently visible protected window --------
+while read -r addr; do
+    [ "$(hyprctl getprop "address:$addr" no_screen_share)" = "true" ] || continue
+    hyprctl dispatch setprop "address:$addr" no_screen_share 0 >/dev/null
+    unblocked+=("$addr")
+done < <(hyprctl clients -j | jq -r '.[] | select(.hidden == false) | .address')
+
+# --- 3. capture ------------------------------------------------------------
+case "$mode" in
+s) grim -g "$geom" "$save_file" ;;
+m) grim -o "$output" "$save_file" ;;
+p) grim "$save_file" ;;
+esac
+rc=$?
+
+# --- 4. restore immediately, before anything slow happens ------------------
+restore
+trap - EXIT INT TERM HUP
+
+if [ $rc -ne 0 ] || [ ! -s "$save_file" ]; then
+    notify-send -u critical -a "HyDE Alert" "Screenshot Error" "grim failed"
+    exit 1
+fi
+
+wl-copy --type image/png <"$save_file"
+
+if [ -n "$annotate" ]; then
+    if [ "$annotate" = satty ]; then
+        satty -f "$save_file" -o "$save_file" --copy-command wl-copy
+    else
+        printf '[Default]\nsave_dir=%s\nsave_filename_format=%s\n' \
+            "$save_dir" "$(basename "$save_file")" >"${XDG_CONFIG_HOME:-$HOME/.config}/swappy/config"
+        swappy -f "$save_file" -o "$save_file"
+    fi
+fi
+
+notify-send -r 9 -a "HyDE Alert" -i "$save_file" \
+    "Screenshot (protection bypassed)" "saved in $save_dir"

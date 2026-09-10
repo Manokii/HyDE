@@ -151,3 +151,14 @@ P|${HOME}/.config/hypr|hypridle.conf|hypridle
 
  Bluelight filter daemon 
 P|${HOME}/.config/hypr|hyprsunset.conf|hyprsunset
+
+ Others 
+S|${HOME}/.config|caelestia|caelestia-shell
+S|${HOME}/.config|tmux|tmux
+S|${HOME}/.config/hyprpanel|config.json|ags-hyprpanel-git
+S|${HOME}/.config/kitty|userprefs.conf|kitty
+S|${HOME}/.config/hypr|userprefs.conf userprefs.windowrules.conf noscreenshare.conf device-config|hyprland
+S|${HOME}/.config/ghostty|config shaders hyde_theme|ghostty
+S|${HOME}/.config/hyde|config.toml|hyprland
+S|${HOME}/.local/bin|noscreenshare-toggle|hyprland libnotify
+S|${HOME}/.local/bin|screenshot-unblocked|hyprland grim slurp jq wl-clipboard libnotify

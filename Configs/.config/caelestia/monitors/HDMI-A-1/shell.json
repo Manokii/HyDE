@@ -1,0 +1,8 @@
+{
+    "background": {
+        "desktopClock": {
+            "enabled": true,
+            "position": "bottom-left"
+        }
+    }
+}
